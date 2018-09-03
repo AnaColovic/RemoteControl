@@ -1,13 +1,25 @@
 package server;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+import javax.swing.JPanel;
+
 
 
 public class CommandsSender implements KeyListener, MouseMotionListener, MouseListener{
+
+	
+	public CommandsSender(Socket cSocket, JPanel cPanel, Rectangle clientScreenDim) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
