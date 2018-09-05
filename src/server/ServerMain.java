@@ -1,16 +1,10 @@
 package server;
 
-import java.awt.BorderLayout;
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import server.ClientHandler;
-import server.gui.GUIControler;
 
 public class ServerMain {
     private JDesktopPane desktop = new JDesktopPane();
