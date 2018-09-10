@@ -1,5 +1,6 @@
 package server;
 
+import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,13 +19,13 @@ import server.EnumCommands;
 
 public class CommandsSender implements KeyListener, MouseMotionListener, MouseListener{
 
-	private Socket cSocket = null;
+	private ClientHandler cHandler= null;
 	private JPanel cPanel = null;
 	private Rectangle clientScreenDim = null;
 	private PrintWriter pw = null;
 	
-	public CommandsSender(Socket s, JPanel p, Rectangle r) {
-		cSocket = s;
+	public CommandsSender(ClientHandler ch, JPanel p, Rectangle r) {
+		cHandler = ch;
 		cPanel = p;
 		clientScreenDim = r;
 		
@@ -32,11 +33,11 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 	     cPanel.addMouseListener(this);
 	     cPanel.addMouseMotionListener(this);
 	     
+	     
 	     try {
-			pw = new PrintWriter(cSocket.getOutputStream());
+			pw = new PrintWriter(cHandler.getServerMain().getClientSocket().getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}   
 	}
 
@@ -60,13 +61,13 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		System.out.println("Mouse Pressed");
         pw.println(EnumCommands.PRESS_MOUSE.getAbbrev());
         int button = arg0.getButton();
         int xButton = 16;
         if (button == 3) {
             xButton = 4;
         }
+        System.out.println(button+"");
         pw.println(xButton);
         pw.flush();
 		
@@ -74,7 +75,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		 System.out.println("Mouse Released");
 	        pw.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
 	        int button = arg0.getButton();
 	        int xButton = 16;
@@ -95,10 +95,7 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		double xScale = clientScreenDim.getWidth()/cPanel.getWidth();
-        System.out.println("xScale: " + xScale);
         double yScale = clientScreenDim.getHeight()/cPanel.getHeight();
-        System.out.println("yScale: " + yScale);
-        System.out.println("Mouse Moved");
         pw.println(EnumCommands.MOVE_MOUSE.getAbbrev());
         pw.println((int)(arg0.getX() * xScale));
         pw.println((int)(arg0.getY() * yScale));
@@ -108,7 +105,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		System.out.println("Key Pressed");
         pw.println(EnumCommands.PRESS_KEY.getAbbrev());
         pw.println(arg0.getKeyCode());
         pw.flush();
@@ -117,9 +113,9 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		System.out.println("Key Pressed");
         pw.println(EnumCommands.PRESS_KEY.getAbbrev());
         pw.println(arg0.getKeyCode());
+        System.out.println(arg0.getKeyCode());
         pw.flush();
 		
 	}
@@ -129,5 +125,13 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 		// TODO Auto-generated method stub
 		
 	}
+	public void programTerminated(){
+		pw.println(EnumCommands.PROGRAM_TERMINATED.getAbbrev());
+		pw.flush();
+		pw.close();
+		cHandler.terminate();
+		
+	}
+	
 
 }

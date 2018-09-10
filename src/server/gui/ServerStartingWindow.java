@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -51,10 +53,11 @@ public class ServerStartingWindow extends JFrame {
 		btnExit.setBorderPainted(false);
 		btnExit.setOpaque(false);
 		btnExit.setFocusPainted(false);
-		btnExit.setRolloverIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\RemoteExitSmall.png .png"));
+		btnExit.setRolloverIcon(new ImageIcon());
 		btnExit.setContentAreaFilled(false);
 		btnExit.setForeground(new Color(0, 0, 0));
-		btnExit.setIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\RemoteExit.png"));
+		btnExit.setRolloverIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/RemoteExitSmall.png .png")));
+		btnExit.setIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/RemoteExit.png")));
 		btnExit.setBackground(new Color(220, 20, 60));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,12 +76,12 @@ public class ServerStartingWindow extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setBackground(Color.LIGHT_GRAY);
-		label.setIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\Untitled-2.png"));
+		label.setIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/TextInput.png")));
 		label.setBounds(81, 77, 120, 28);
 		contentPane.add(label);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\top.png"));
+		label_1.setIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/top.png")));
 		label_1.setBounds(0, 0, 275, 22);
 		contentPane.add(label_1);
 		
@@ -94,14 +97,18 @@ public class ServerStartingWindow extends JFrame {
 				GUIControler.startSeverMainWindow(Integer.parseInt(textField.getText()));
 			}
 		});
-		btnOk.setRolloverIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\button-ok-small.png"));
+		btnOk.setRolloverIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/button-ok-small.png")));
 		btnOk.setContentAreaFilled(false);
 		btnOk.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnOk.setOpaque(false);
 		btnOk.setFocusPainted(false);
 		btnOk.setBorderPainted(false);
-		btnOk.setIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\button-ok.png"));
+		btnOk.setIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/button-ok.png")));
 		btnOk.setBounds(95, 107, 93, 16);
 		contentPane.add(btnOk);
+	}
+	
+	public void textInputReset(){
+		this.textField.setText("");
 	}
 }

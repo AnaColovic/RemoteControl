@@ -44,8 +44,8 @@ public class ServerMainWindow extends JFrame {
         btnX.setContentAreaFilled(false);
         btnX.setBorderPainted(false);
         btnX.setOpaque(false);
-        btnX.setIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\RemoteExit.png"));
-        btnX.setRolloverIcon(new ImageIcon("C:\\Users\\Nikola\\Desktop\\RemoteExitSmall.png .png"));
+        btnX.setIcon(new ImageIcon(ServerMainWindow.class.getResource("/Images/RemoteExit.png")));
+        btnX.setRolloverIcon(new ImageIcon(ServerMainWindow.class.getResource("/Images/RemoteExitSmall.png .png")));
         btnX.addActionListener(new ActionListener() {
 			
 			@Override

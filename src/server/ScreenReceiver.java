@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 
 public class ScreenReceiver extends Thread{
 
+	private ClientHandler cHandler=null;
     private ObjectInputStream cObjectInputStream = null;
     private JPanel cPanel = null;
 
-    public ScreenReceiver(ObjectInputStream ois, JPanel p) {
+    public ScreenReceiver(ClientHandler ch, ObjectInputStream ois, JPanel p) {
+    	cHandler=ch;
     	cObjectInputStream = ois;
     	cPanel = p;
     	
@@ -23,7 +25,6 @@ public class ScreenReceiver extends Thread{
     	while(true) {
     		try {
 				ImageIcon imgIcon = (ImageIcon)cObjectInputStream.readObject();
-				System.out.println("New image received!");
 				Image img = imgIcon.getImage();
 				img = img.getScaledInstance(cPanel.getWidth(), cPanel.getHeight(), Image.SCALE_FAST);
 				
@@ -31,11 +32,9 @@ public class ScreenReceiver extends Thread{
 				graphics.drawImage(img, 0, 0, cPanel.getWidth(), cPanel.getHeight(), cPanel);
 				
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				cHandler.terminate();
 			}
     		
     		

@@ -7,14 +7,16 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import javax.swing.JPanel;
 
+import server.gui.GUIControler;
+
 public class ClientHandler extends Thread {
 
 
-    private Socket cSocket = null;
+    private ServerMain sMain = null;
     private JPanel cPanel =null;
     
-    public ClientHandler(Socket cSocket, JPanel desktop) {
-        this.cSocket = cSocket;
+    public ClientHandler(ServerMain sm, JPanel desktop) {
+        this.sMain = sm;
         this.cPanel = desktop;
         start();
     }
@@ -23,7 +25,7 @@ public class ClientHandler extends Thread {
         ObjectInputStream ois = null;
 
         try{
-            ois = new ObjectInputStream(cSocket.getInputStream());
+            ois = new ObjectInputStream(sMain.getClientSocket().getInputStream());
             clientScreenDim =(Rectangle) ois.readObject();
         }catch(IOException ex){
             ex.printStackTrace();
@@ -31,8 +33,16 @@ public class ClientHandler extends Thread {
             ex.printStackTrace();
         }
 
-       new ScreenReceiver(ois,cPanel);
-       new CommandsSender(cSocket,cPanel,clientScreenDim);
+       new ScreenReceiver(this,ois,cPanel);
+       new CommandsSender(this,cPanel,clientScreenDim);
     }
-
+    
+    public ServerMain getServerMain(){
+    	return this.sMain;
+    }
+    
+    public void terminate(){
+    	sMain.clientDisconnectedProgramTerminated();
+    	GUIControler.clientDisconected();
+    }
 }

@@ -1,10 +1,12 @@
 package server.gui;
 
 import java.awt.BorderLayout;
+import java.awt.MouseInfo;
 import java.net.Socket;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import server.*;
 
@@ -24,6 +26,13 @@ public class GUIControler {
 		ssw.setVisible(false);
 		sm=new ServerMain();
 		sm.serverStart(port,smw.getClientDesktopPanel());
+	}
+	
+	public static void clientDisconected(){
+		smw=null;
+		ssw.textInputReset();
+		JOptionPane.showMessageDialog(ssw, "Client disconnected", "Program terminated", JOptionPane.INFORMATION_MESSAGE);
+		ssw.setVisible(true);
 	}
 
 
