@@ -28,9 +28,6 @@ public class ServerStartingWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 
-	/**
-	 * Create the frame.
-	 */
 	public ServerStartingWindow() {
 		setUndecorated(true);
 		setResizable(false);
@@ -94,7 +91,7 @@ public class ServerStartingWindow extends JFrame {
 		JButton btnOk = new JButton("");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUIControler.startSeverMainWindow(Integer.parseInt(textField.getText()));
+				GUIControler.startServerMainWindow(Integer.parseInt(textField.getText()));
 			}
 		});
 		btnOk.setRolloverIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/button-ok-small.png")));
@@ -108,7 +105,4 @@ public class ServerStartingWindow extends JFrame {
 		contentPane.add(btnOk);
 	}
 	
-	public void textInputReset(){
-		this.textField.setText("");
-	}
 }

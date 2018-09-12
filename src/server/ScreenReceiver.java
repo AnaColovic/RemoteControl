@@ -21,7 +21,8 @@ public class ScreenReceiver extends Thread{
     	start();
     }
     
-    public void run() {
+
+	public void run() {
     	while(true) {
     		try {
 				ImageIcon imgIcon = (ImageIcon)cObjectInputStream.readObject();
@@ -30,7 +31,6 @@ public class ScreenReceiver extends Thread{
 				
 				Graphics graphics = cPanel.getGraphics();
 				graphics.drawImage(img, 0, 0, cPanel.getWidth(), cPanel.getHeight(), cPanel);
-				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

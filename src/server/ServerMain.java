@@ -20,7 +20,7 @@ public class ServerMain {
             sc = new ServerSocket(port);
             
             client = sc.accept();
-                
+            GUIControler.showServerMainWindow();
             new ClientHandler(this,desktop);
           
         }catch (Exception ex) {

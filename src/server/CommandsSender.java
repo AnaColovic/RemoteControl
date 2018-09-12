@@ -29,15 +29,16 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 		cPanel = p;
 		clientScreenDim = r;
 		
-		 cPanel.addKeyListener(this);
-	     cPanel.addMouseListener(this);
-	     cPanel.addMouseMotionListener(this);
+		
+		cPanel.requestFocusInWindow();
+   	 	cPanel.addKeyListener(this);
+	    cPanel.addMouseListener(this);
+	    cPanel.addMouseMotionListener(this);
 	     
-	     
-	     try {
+	    try {
 			pw = new PrintWriter(cHandler.getServerMain().getClientSocket().getOutputStream());
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}   
 	}
 
@@ -67,7 +68,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
         if (button == 3) {
             xButton = 4;
         }
-        System.out.println(button+"");
         pw.println(xButton);
         pw.flush();
 		
@@ -75,6 +75,7 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		System.out.println("Pustio si misa");
 	        pw.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
 	        int button = arg0.getButton();
 	        int xButton = 16;
@@ -113,9 +114,8 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-        pw.println(EnumCommands.PRESS_KEY.getAbbrev());
+        pw.println(EnumCommands.RELEASE_KEY.getAbbrev());
         pw.println(arg0.getKeyCode());
-        System.out.println(arg0.getKeyCode());
         pw.flush();
 		
 	}
@@ -125,12 +125,13 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public void programTerminated(){
 		pw.println(EnumCommands.PROGRAM_TERMINATED.getAbbrev());
 		pw.flush();
 		pw.close();
 		cHandler.terminate();
-		
+	
 	}
 	
 
