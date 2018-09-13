@@ -20,20 +20,31 @@ public class GUIControler {
 		ssw=new ServerStartingWindow();
 		ssw.setVisible(true);
 	}
-	public static void startSeverMainWindow(int port){
+	public static void startServerMainWindow(int port){
 		smw=new ServerMainWindow();
-		smw.setVisible(true);
+		smw.setExtendedState(JFrame.ICONIFIED);
+		smw.allowListeners();
 		ssw.setVisible(false);
 		sm=new ServerMain();
+		
 		sm.serverStart(port,smw.getClientDesktopPanel());
 	}
 	
 	public static void clientDisconected(){
-		smw=null;
-		ssw.textInputReset();
-		JOptionPane.showMessageDialog(ssw, "Client disconnected", "Program terminated", JOptionPane.INFORMATION_MESSAGE);
-		ssw.setVisible(true);
+		if(smw!=null){
+			smw.dispose();
+			smw=null;
+			JOptionPane.showMessageDialog(ssw, "Client disconnected", "Program terminated", JOptionPane.INFORMATION_MESSAGE);
+			ssw=new ServerStartingWindow();
+			ssw.setVisible(true);
+		}
 	}
-
+	
+	public static void showServerMainWindow(){
+		smw.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	}
+	public static void minimizeServerMainWindow(){
+		smw.setState(JFrame.ICONIFIED);
+	}
 
 }

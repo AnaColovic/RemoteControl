@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import server.gui.GUIControler;
 
 public class ClientHandler extends Thread {
-
-
     private ServerMain sMain = null;
     private JPanel cPanel =null;
     

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -26,8 +28,10 @@ public class ServerMainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Show the frame in a maximized state
         setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
+        
         getContentPane().setLayout(new BorderLayout(0, 0));
         
+        //Creating top panel with JLabel "client screen" and exit button
         JPanel panel = new JPanel();
         panel.setBackground(SystemColor.controlDkShadow);
         panel.setBorder(new LineBorder(new Color(105, 105, 105), 5, true));
@@ -38,7 +42,31 @@ public class ServerMainWindow extends JFrame {
         JLabel lblClientScreen = new JLabel("client screen");
         panel.add(lblClientScreen, BorderLayout.WEST);
         
+        JPanel panel_2 = new JPanel();
+        panel_2.setBorder(null);
+        panel_2.setOpaque(false);
+        panel_2.setBackground(SystemColor.controlDkShadow);
+        panel.add(panel_2, BorderLayout.EAST);
+        
+        JButton btnMinimize = new JButton("");
+        btnMinimize.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		GUIControler.minimizeServerMainWindow();
+        	}
+        	
+        });
+        btnMinimize.setToolTipText("Minimize");
+        btnMinimize.setContentAreaFilled(false);
+        btnMinimize.setBorderPainted(false);
+        btnMinimize.setBorder(null);
+        btnMinimize.setFocusPainted(false);
+        btnMinimize.setRolloverIcon(new ImageIcon(ServerMainWindow.class.getResource("/Images/RemoteMinimizeSmall.png")));
+        btnMinimize.setIcon(new ImageIcon(ServerMainWindow.class.getResource("/Images/RemoteMinimize.png")));
+        panel_2.add(btnMinimize);
+        
         JButton btnX = new JButton("");
+        panel_2.add(btnX);
+        btnX.setToolTipText("Exit");
         btnX.setBorder(null);
         btnX.setFocusPainted(false);
         btnX.setContentAreaFilled(false);
@@ -54,7 +82,6 @@ public class ServerMainWindow extends JFrame {
 				
 			}
 		});
-        panel.add(btnX, BorderLayout.EAST);
         
         panel_1 = new JPanel();
         getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -62,5 +89,9 @@ public class ServerMainWindow extends JFrame {
 	}
 	public JPanel getClientDesktopPanel(){
 		return panel_1;
+	}
+	public void allowListeners(){
+		panel_1.setFocusable(true);
+		this.setVisible(true);
 	}
 }
