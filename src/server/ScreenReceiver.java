@@ -23,21 +23,20 @@ public class ScreenReceiver extends Thread{
     
 
 	public void run() {
-    	while(true) {
+    	
     		try {
+    			while(true) {
 				ImageIcon imgIcon = (ImageIcon)cObjectInputStream.readObject();
 				Image img = imgIcon.getImage();
 				img = img.getScaledInstance(cPanel.getWidth(), cPanel.getHeight(), Image.SCALE_FAST);
 				
 				Graphics graphics = cPanel.getGraphics();
 				graphics.drawImage(img, 0, 0, cPanel.getWidth(), cPanel.getHeight(), cPanel);
+    			}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				cHandler.terminate();
-			}
-    		
-    		
     	}
     }
 

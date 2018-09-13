@@ -91,7 +91,11 @@ public class ServerStartingWindow extends JFrame {
 		JButton btnOk = new JButton("");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
 				GUIControler.startServerMainWindow(Integer.parseInt(textField.getText()));
+				}catch(NumberFormatException ex) {
+					GUIControler.portNotAvailable();
+				}
 			}
 		});
 		btnOk.setRolloverIcon(new ImageIcon(ServerStartingWindow.class.getResource("/Images/button-ok-small.png")));

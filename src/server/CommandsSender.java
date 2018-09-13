@@ -74,7 +74,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		System.out.println("Pustio si misa");
 	        pw.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
 	        int button = arg0.getButton();
 	        int xButton = 16;

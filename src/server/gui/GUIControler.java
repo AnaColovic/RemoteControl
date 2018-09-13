@@ -28,6 +28,7 @@ public class GUIControler {
 		sm=new ServerMain();
 		
 		sm.serverStart(port,smw.getClientDesktopPanel());
+		
 	}
 	
 	public static void clientDisconnected(){
@@ -38,6 +39,14 @@ public class GUIControler {
 			ssw=new ServerStartingWindow();
 			ssw.setVisible(true);
 		}
+	}
+	
+	public static void portNotAvailable() {
+		ssw.setVisible(false);
+		ssw = null;
+		JOptionPane.showMessageDialog(ssw, "Port not available.", "Program terminated", JOptionPane.INFORMATION_MESSAGE);
+		ssw=new ServerStartingWindow();
+		ssw.setVisible(true);
 	}
 	
 	public static void showServerMainWindow(){
