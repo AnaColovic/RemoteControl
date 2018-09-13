@@ -11,7 +11,6 @@ import server.ClientHandler;
 import server.gui.GUIControler;
 
 public class ServerMain {
-    private JDesktopPane desktop = new JDesktopPane();
     private ServerSocket sc=null;
     private Socket client=null;
 	
@@ -25,7 +24,7 @@ public class ServerMain {
           
         }catch (Exception ex) {
         	clientDisconnectedProgramTerminated();
-        	GUIControler.clientDisconected();
+        	GUIControler.clientDisconnected();
         }
 	}
 	public void clientDisconnectedProgramTerminated(){

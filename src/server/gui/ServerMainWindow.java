@@ -20,7 +20,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 public class ServerMainWindow extends JFrame {
-	private JPanel panel_1=null;
+	private JPanel ClientDesktopPanel=null;
 	
 	public ServerMainWindow() {
 		setUndecorated(true);
@@ -83,15 +83,15 @@ public class ServerMainWindow extends JFrame {
 			}
 		});
         
-        panel_1 = new JPanel();
-        getContentPane().add(panel_1, BorderLayout.CENTER);
+        ClientDesktopPanel = new JPanel();
+        getContentPane().add(ClientDesktopPanel, BorderLayout.CENTER);
 
 	}
 	public JPanel getClientDesktopPanel(){
-		return panel_1;
+		return ClientDesktopPanel;
 	}
 	public void allowListeners(){
-		panel_1.setFocusable(true);
+		ClientDesktopPanel.setFocusable(true);
 		this.setVisible(true);
 	}
 }

@@ -41,6 +41,6 @@ public class ClientHandler extends Thread {
     
     public void terminate(){
     	sMain.clientDisconnectedProgramTerminated();
-    	GUIControler.clientDisconected();
+    	GUIControler.clientDisconnected();
     }
 }

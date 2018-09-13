@@ -30,7 +30,7 @@ public class GUIControler {
 		sm.serverStart(port,smw.getClientDesktopPanel());
 	}
 	
-	public static void clientDisconected(){
+	public static void clientDisconnected(){
 		if(smw!=null){
 			smw.dispose();
 			smw=null;
