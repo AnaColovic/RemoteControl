@@ -1,6 +1,6 @@
 package server;
 
-import java.awt.MouseInfo;
+
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.Socket;
 
 import javax.swing.JPanel;
 
@@ -67,7 +66,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
         if (button == 3) {
             xButton = 4;
         }
-        System.out.println(button+"");
         pw.println(xButton);
         pw.flush();
 		
@@ -115,7 +113,6 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 	public void keyReleased(KeyEvent arg0) {
         pw.println(EnumCommands.PRESS_KEY.getAbbrev());
         pw.println(arg0.getKeyCode());
-        System.out.println(arg0.getKeyCode());
         pw.flush();
 		
 	}
@@ -133,5 +130,4 @@ public class CommandsSender implements KeyListener, MouseMotionListener, MouseLi
 		
 	}
 	
-
 }
