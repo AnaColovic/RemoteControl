@@ -28,7 +28,7 @@ public class ServerMainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Show the frame in a maximized state
         setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
-        
+        setIconImage(new ImageIcon(ServerMainWindow.class.getResource("/images/Logo.png")).getImage());
         getContentPane().setLayout(new BorderLayout(0, 0));
         
         //Creating top panel with JLabel "client screen" and exit button

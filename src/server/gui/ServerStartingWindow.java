@@ -34,6 +34,7 @@ public class ServerStartingWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 275, 185);
 		setLocationRelativeTo(null);
+		setIconImage(new ImageIcon(ServerMainWindow.class.getResource("/images/Logo.png")).getImage());
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.scrollbar);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 0, true));
@@ -93,7 +94,7 @@ public class ServerStartingWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				GUIControler.startServerMainWindow(Integer.parseInt(textField.getText()));
-				}catch(NumberFormatException ex) {
+				}catch(Exception ex) {
 					GUIControler.portNotAvailable();
 				}
 			}
